@@ -1,8 +1,6 @@
 package urlshort
 
 import (
-	"fmt"
-	"html"
 	"net/http"
 )
 
@@ -15,7 +13,12 @@ import (
 func MapHandler(pathsToUrls map[string]string, fallback http.Handler) http.HandlerFunc {
 	//	TODO: Implement this...
 	return http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(rw, "Hello, %q", html.EscapeString(r.URL.Path))
+		path := r.URL.Path
+		if dest, ok := pathsToUrls[path]; ok {
+			http.Redirect(rw, r, dest, http.StatusFound)
+			return
+		}
+		fallback.ServeHTTP(rw, r)
 	})
 
 }

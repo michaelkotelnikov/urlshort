@@ -30,7 +30,7 @@ func main() {
 	//	if err != nil {
 	//		panic(err)
 	//	}
-	//http.Handle("/", mux)
+	http.Handle("/", mux)
 	fmt.Println("Starting the server on :8080")
 	http.ListenAndServe(":8080", mapHandler)
 }

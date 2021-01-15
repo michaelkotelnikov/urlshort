@@ -12,7 +12,7 @@ import (
 // http.Handler will be called instead.
 func MapHandler(pathsToUrls map[string]string, fallback http.Handler) http.HandlerFunc {
 	//	TODO: Implement this...
-	return http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
+	return func(rw http.ResponseWriter, r *http.Request) {
 		//path := r.URL.Path
 		//if dest, ok := pathsToUrls[path]; ok {
 		//	http.Redirect(rw, r, dest, http.StatusFound)
@@ -21,7 +21,7 @@ func MapHandler(pathsToUrls map[string]string, fallback http.Handler) http.Handl
 		//fallback.ServeHTTP(rw, r)
 		http.Redirect(rw, r, "https://google.com", http.StatusFound)
 		return
-	})
+	}
 
 }
 

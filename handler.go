@@ -41,9 +41,7 @@ func MapHandler(pathsToUrls map[string]string, fallback http.Handler) http.Handl
 // a mapping of paths to urls.
 func YAMLHandler(yml []byte, fallback http.Handler) (http.HandlerFunc, error) {
 	redirectors := ParseYAML(yml)
-	fmt.Println(redirectors)
 	urlMap := StructToMap(redirectors)
-	fmt.Println(urlMap)
 	return MapHandler(urlMap, fallback), nil
 }
 
@@ -58,7 +56,6 @@ func StructToMap(redirectors []Redirector) map[string]string {
 func ParseYAML(yml []byte) []Redirector {
 	var redirectors []Redirector
 	yaml.Unmarshal(yml, &redirectors)
-	fmt.Println(redirectors)
 	return redirectors
 }
 

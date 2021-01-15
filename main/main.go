@@ -15,6 +15,7 @@ func main() {
 		"/urlshort-godoc": "https://godoc.org/github.com/gophercises/urlshort",
 		"/yaml-godoc":     "https://godoc.org/gopkg.in/yaml.v2",
 	}
+
 	mapHandler := urlshort.MapHandler(pathsToUrls, mux)
 
 	// Build the YAMLHandler using the mapHandler as the
@@ -29,16 +30,18 @@ func main() {
 	//	if err != nil {
 	//		panic(err)
 	//	}
+	//http.Handle("/", mux)
 	fmt.Println("Starting the server on :8080")
 	http.ListenAndServe(":8080", mapHandler)
 }
 
 func defaultMux() *http.ServeMux {
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", hello)
+	mux.HandleFunc("/hello", hello)
 	return mux
 }
 
 func hello(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "Hello, world!")
+	//http.Redirect(w, r, "http://www.google.com", http.StatusFound)
 }

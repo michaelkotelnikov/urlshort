@@ -57,7 +57,8 @@ func StructToMap(redirectors []Redirector) map[string]string {
 
 func ParseYAML(yml []byte) []Redirector {
 	var redirectors []Redirector
-	yaml.Unmarshal(yml, &redirectors)	
+	yaml.Unmarshal(yml, &redirectors)
+	fmt.Println(redirectors)
 	return redirectors
 }
 
